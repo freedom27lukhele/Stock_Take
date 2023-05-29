@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "897314442734",
+    "project_id": "stocktakeblu",
+    "storage_bucket": "stocktakeblu.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:897314442734:android:1c00929b25ed83de7052ff",
+        "android_client_info": {
+          "package_name": "com.example.takestock"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "897314442734-l6f62gvf5jl0e9l98bm3ip0o9c2eenbn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.takestock",
+            "certificate_hash": "6117de56959df3d8ffef6320381349b2c06825f8"
+          }
+        },
+        {
+          "client_id": "897314442734-bdu0s8dupa00ssmffg2elq5n7ak1sa82.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC8rB2JoIoVFbPs5bxjjPw-pzqagXSK6pQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "897314442734-bdu0s8dupa00ssmffg2elq5n7ak1sa82.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
