@@ -32,7 +32,7 @@ public class Login extends AppCompatActivity {
         final EditText phone = findViewById(R.id.phone);
         final EditText password = findViewById(R.id.password);
         final Button loginBtn = findViewById(R.id.loginBtn);
-        final Button registerNowBtn = findViewById(R.id.registerNowBtn);
+        final TextView registerNowBtn = findViewById(R.id.registerNowBtn);
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -21,7 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class Register extends AppCompatActivity {
     private Button RegisterBtn;
-//    private Button loginNowBtn;
+    private TextView loginNowBtn;
 
     //create object of DatabaseReference class to access firebases Realtime Database
     DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReferenceFromUrl("https://stocktakeblu-default-rtdb.firebaseio.com/");
@@ -38,6 +38,7 @@ public class Register extends AppCompatActivity {
         final EditText confirmPassword = findViewById(R.id.confirmPassword);
 
         RegisterBtn = findViewById(R.id.registerBtn);
+        loginNowBtn = findViewById(R.id.loginBtn);
 
         RegisterBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,8 +93,13 @@ public class Register extends AppCompatActivity {
                 }
             }
         });
+        loginNowBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    startActivity(new Intent(Register.this, Login.class));
+            }
 
-
+        });
     }
 
 

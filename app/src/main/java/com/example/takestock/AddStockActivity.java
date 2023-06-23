@@ -4,6 +4,7 @@ package com.example.takestock;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.takestock.Stockfile.stockModal;
 import com.google.android.material.textfield.TextInputEditText;
@@ -44,7 +46,7 @@ public class AddStockActivity extends AppCompatActivity {
         personNameEdt = findViewById(R.id.idEdtPersonName);
         deviceNameEdt = findViewById(R.id.idEdtDeviceName);
         deviceSerialEdt = findViewById(R.id.idEdtDeviceSerial);
-        dateEdt = findViewById(R.id.idEdtDate);
+//        dateEdt = findViewById(R.id.idEdtDate);
 
         loadingPB = findViewById(R.id.idPBLoading);
         firebaseDatabase = FirebaseDatabase.getInstance();
@@ -93,7 +95,7 @@ public class AddStockActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         // on below line we are setting data in our firebase database.
-                         snapshot.child(stockId).child("Stock").getValue(String.class);
+                        snapshot.child(stockId).child("Stock").getValue(String.class);
 
                         databaseReference.child(stockId).setValue(stock);
                         // displaying a toast message.
@@ -110,5 +112,23 @@ public class AddStockActivity extends AppCompatActivity {
                 });
             }
         });
+
+        // toolbar
+//
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // handle arrow click here
+        if (item.getItemId() == android.R.id.home) {
+            finish(); // close this activity and return to preview activity (if there is any)
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        supportFinishAfterTransition();
     }
 }
