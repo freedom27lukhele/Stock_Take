@@ -72,6 +72,7 @@ public class AddStockActivity extends AppCompatActivity {
                                 dateEdt.setText(dayOfMonth + "/"
                                         + (monthOfYear + 1) + "/" + year);
 
+
                             }
                         }, mYear, mMonth, mDay);
                 datePickerDialog.show();
