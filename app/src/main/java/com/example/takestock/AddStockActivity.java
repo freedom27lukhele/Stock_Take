@@ -28,6 +28,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import com.journeyapps.barcodescanner.ScanContract;
 import com.journeyapps.barcodescanner.ScanOptions;
+import com.rejowan.cutetoast.CuteToast;
 
 
 import java.util.Calendar;
@@ -121,7 +122,8 @@ public class AddStockActivity extends AppCompatActivity {
 
                         databaseReference.child(stockId).setValue(stock);
                         // displaying a toast message.
-                        Toast.makeText(AddStockActivity.this, "Stock Added..", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(AddStockActivity.this, "Stock Added..", Toast.LENGTH_SHORT).show();
+                        CuteToast.ct(AddStockActivity.this, "Stock Added..", CuteToast.LENGTH_SHORT, CuteToast.SUCCESS, true).show();
                         // starting a main activity.
                         personNameEdt.setText("");
                         deviceNameEdt.setText("");
@@ -134,7 +136,8 @@ public class AddStockActivity extends AppCompatActivity {
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
                         // displaying a failure message on below line.
-                        Toast.makeText(AddStockActivity.this, "Fail to add Stock..", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(AddStockActivity.this, "Fail to add Stock..", Toast.LENGTH_SHORT).show();
+                        CuteToast.ct(AddStockActivity.this, "Fail to add Stock..", Toast.LENGTH_SHORT, CuteToast.WARN, true).show();
                     }
                 });
             }
