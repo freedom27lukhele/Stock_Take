@@ -95,31 +95,6 @@
             <!--edit text for course image link-->
 
             <!--edit text for course link-->
-<!--            <com.google.android.material.textfield.TextInputLayout-->
-<!--                android:id="@+id/idTILDate"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginLeft="10dp"-->
-<!--                android:layout_marginTop="10dp"-->
-<!--                android:layout_marginRight="10dp"-->
-<!--                android:hint="Enter Date"-->
-<!--                android:padding="5dp"-->
-<!--                android:textColorHint="@color/black"-->
-<!--                app:hintTextColor="@color/black">-->
-
-<!--                <com.google.android.material.textfield.TextInputEditText-->
-<!--                    android:id="@+id/idEdtDate"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:ems="10"-->
-<!--                    android:importantForAutofill="no"-->
-<!--                    android:inputType="textImeMultiLine|textMultiLine"-->
-<!--                    android:textColor="@color/black"-->
-<!--                    android:textColorHint="@color/black"-->
-<!--                    android:textSize="14sp" />-->
-<!--            </com.google.android.material.textfield.TextInputLayout>-->
-            <!--edit text for course description-->
-
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/idTILDate"
                 android:layout_width="match_parent"
@@ -127,24 +102,22 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
+                android:hint="Enter Date"
                 android:padding="5dp"
                 android:textColorHint="@color/black"
                 app:hintTextColor="@color/black">
-            <EditText
-                android:id="@+id/idEdtDate"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:ems="10"
-                android:importantForAutofill="no"
-                android:inputType="textImeMultiLine|textMultiLine"
-                android:textColor="@color/black"
-                android:textColorHint="@color/black"
-                android:hint="Select Date..."
-                android:padding="15dp"
-                android:textSize="14sp" />
 
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/idEdtDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:ems="10"
+                    android:importantForAutofill="no"
+                    android:inputType="textImeMultiLine|textMultiLine"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/black"
+                    android:textSize="14sp" />
             </com.google.android.material.textfield.TextInputLayout>
-
 
             <!--button for adding a new course-->
             <Button

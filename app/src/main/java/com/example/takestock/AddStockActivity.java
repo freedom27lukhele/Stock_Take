@@ -2,6 +2,7 @@ package com.example.takestock;
 
 
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -11,7 +12,9 @@ import android.widget.DatePicker;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -23,7 +26,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import com.journeyapps.barcodescanner.ScanContract;
+import com.journeyapps.barcodescanner.ScanOptions;
+
+
 import java.util.Calendar;
+import java.util.Date;
 
 public class AddStockActivity extends AppCompatActivity {
 
@@ -35,7 +43,9 @@ public class AddStockActivity extends AppCompatActivity {
     DatabaseReference databaseReference;
     private ProgressBar loadingPB;
     private String stockId;
-    DatePickerDialog datePickerDialog;
+
+    String currentDateTimeString = java.text.DateFormat.getDateTimeInstance().format(new Date());
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,38 +56,49 @@ public class AddStockActivity extends AppCompatActivity {
         personNameEdt = findViewById(R.id.idEdtPersonName);
         deviceNameEdt = findViewById(R.id.idEdtDeviceName);
         deviceSerialEdt = findViewById(R.id.idEdtDeviceSerial);
-//        dateEdt = findViewById(R.id.idEdtDate);
+        dateEdt = findViewById(R.id.idEdtDate);
+
 
         loadingPB = findViewById(R.id.idPBLoading);
         firebaseDatabase = FirebaseDatabase.getInstance();
         // on below line creating our database reference.
         databaseReference = firebaseDatabase.getReferenceFromUrl("https://stocktakeblu-default-rtdb.firebaseio.com/");
+
+
         // adding click listener for our add course button.
-        dateEdt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // calender class's instance and get current date , month and year from calender
-                final Calendar c = Calendar.getInstance();
-                int mYear = c.get(Calendar.YEAR); // current year
-                int mMonth = c.get(Calendar.MONTH); // current month
-                int mDay = c.get(Calendar.DAY_OF_MONTH); // current day
-                // date picker dialog
-                datePickerDialog = new DatePickerDialog(AddStockActivity.this,
-                        new DatePickerDialog.OnDateSetListener() {
+//        dateEdt.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                // calender class's instance and get current date , month and year from calender
+//                final Calendar c = Calendar.getInstance();
+//                int mYear = c.get(Calendar.YEAR); // current year
+//                int mMonth = c.get(Calendar.MONTH); // current month
+//                int mDay = c.get(Calendar.DAY_OF_MONTH); // current day
+//                // date picker dialog
+//                datePickerDialog = new DatePickerDialog(AddStockActivity.this,
+//                        new DatePickerDialog.OnDateSetListener() {
+//
+//                            @Override
+//                            public void onDateSet(DatePicker view, int year,
+//                                                  int monthOfYear, int dayOfMonth) {
+//                                // set day of month , month and year value in the edit text
+//                                dateEdt.setText(dayOfMonth + "/"
+//                                        + (monthOfYear + 1) + "/" + year);
+//
+//
+//                            }
+//                        }, mYear, mMonth, mDay);
+//                datePickerDialog.show();
+//            }
+//        });
 
-                            @Override
-                            public void onDateSet(DatePicker view, int year,
-                                                  int monthOfYear, int dayOfMonth) {
-                                // set day of month , month and year value in the edit text
-                                dateEdt.setText(dayOfMonth + "/"
-                                        + (monthOfYear + 1) + "/" + year);
+        dateEdt.setText(currentDateTimeString);
 
-
-                            }
-                        }, mYear, mMonth, mDay);
-                datePickerDialog.show();
-            }
+        deviceSerialEdt.setOnClickListener(v -> {
+            scanCode();
         });
+
+
         addCourseBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,7 +123,12 @@ public class AddStockActivity extends AppCompatActivity {
                         // displaying a toast message.
                         Toast.makeText(AddStockActivity.this, "Stock Added..", Toast.LENGTH_SHORT).show();
                         // starting a main activity.
-                        startActivity(new Intent(AddStockActivity.this, MainActivity.class));
+                        personNameEdt.setText("");
+                        deviceNameEdt.setText("");
+                        deviceSerialEdt.setText("");
+//                        dateEdt.setText("");
+//                        startActivity(new Intent(AddStockActivity.this, MainActivity.class));
+                        loadingPB.setVisibility(View.INVISIBLE);
                     }
 
                     @Override
@@ -114,9 +140,36 @@ public class AddStockActivity extends AppCompatActivity {
             }
         });
 
-        // toolbar
-//
     }
+
+    private void scanCode() {
+
+        ScanOptions option = new ScanOptions();
+        option.setPrompt("volume up tp flash on");
+        option.setBeepEnabled(true);
+        option.setOrientationLocked(true);
+        option.setCaptureActivity(CaptureAct.class);
+        barLauncher.launch(option);
+
+    }
+
+    ActivityResultLauncher<ScanOptions> barLauncher = registerForActivityResult(new ScanContract(), result -> {
+
+        if (result.getContents() != null) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(AddStockActivity.this);
+            builder.setTitle("Result");
+            builder.setMessage(result.getContents());
+            builder.setPositiveButton("", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+
+                }
+            }).show();
+
+            deviceSerialEdt.setText(result.getContents());
+        }
+    });
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -127,9 +180,12 @@ public class AddStockActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         supportFinishAfterTransition();
     }
+
+
 }
