@@ -114,23 +114,31 @@ public class AddStockActivity extends AppCompatActivity {
                 stockModal stock = new stockModal(stockId, personName, deviceName, deviceSerial, date);
                 // on below line we are calling a add value event
                 // to pass data to firebase database.
-                databaseReference.addValueEventListener(new ValueEventListener() {
+                databaseReference.child("Stock").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         // on below line we are setting data in our firebase database.
-                        snapshot.child(stockId).child("Stock").getValue(String.class);
-
-                        databaseReference.child(stockId).setValue(stock);
                         // displaying a toast message.
 //                        Toast.makeText(AddStockActivity.this, "Stock Added..", Toast.LENGTH_SHORT).show();
-                        CuteToast.ct(AddStockActivity.this, "Stock Added..", CuteToast.LENGTH_SHORT, CuteToast.SUCCESS, true).show();
                         // starting a main activity.
                         personNameEdt.setText("");
                         deviceNameEdt.setText("");
                         deviceSerialEdt.setText("");
-//                        dateEdt.setText("");
-//                        startActivity(new Intent(AddStockActivity.this, MainActivity.class));
-                        loadingPB.setVisibility(View.INVISIBLE);
+
+                        if (snapshot.hasChild(stockId)) {
+                            CuteToast.ct(AddStockActivity.this, "Device already exist", Toast.LENGTH_SHORT, CuteToast.WARN, true).show();
+                        } else {
+                            //sending data to firebase realtime database
+                            //we are using phone number as unique identity of every user
+                            //so all the other details of user comes under phone number
+                            databaseReference.child("Stock").child(stockId).child("personsName").setValue(personName);
+                            databaseReference.child("Stock").child(stockId).child("deviceName").setValue(deviceName);
+                            databaseReference.child("Stock").child(stockId).child("deviceSerial").setValue(deviceSerial);
+                            databaseReference.child("Stock").child(stockId).child("date").setValue(date);
+                            CuteToast.ct(AddStockActivity.this, "Stock Added..", CuteToast.LENGTH_SHORT, CuteToast.SUCCESS, true).show();
+
+                            loadingPB.setVisibility(View.INVISIBLE);
+                        }
                     }
 
                     @Override
