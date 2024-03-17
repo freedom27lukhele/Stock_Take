@@ -43,6 +43,8 @@ public class AddStockActivity extends AppCompatActivity {
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
     private ProgressBar loadingPB;
+
+    private Toolbar toolbar;
     private String stockId;
 
     String currentDateTimeString = java.text.DateFormat.getDateTimeInstance().format(new Date());
@@ -52,6 +54,12 @@ public class AddStockActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_stock);
+
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
         // initializing all our variables.
         addCourseBtn = findViewById(R.id.idBtnAddCourse);
         personNameEdt = findViewById(R.id.idEdtPersonName);
@@ -64,7 +72,6 @@ public class AddStockActivity extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
         // on below line creating our database reference.
         databaseReference = firebaseDatabase.getReferenceFromUrl("https://stocktakeblu-default-rtdb.firebaseio.com/");
-
 
         // adding click listener for our add course button.
 //        dateEdt.setOnClickListener(new View.OnClickListener() {
@@ -119,7 +126,7 @@ public class AddStockActivity extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         // on below line we are setting data in our firebase database.
                         // displaying a toast message.
-//                        Toast.makeText(AddStockActivity.this, "Stock Added..", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(AddStockActivity.this, "Stock Added..", Toast.LENGTH_SHORT).show();
                         // starting a main activity.
                         personNameEdt.setText("");
                         deviceNameEdt.setText("");

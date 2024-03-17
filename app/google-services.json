@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "897314442734",
+    "firebase_url": "https://stocktakeblu-default-rtdb.firebaseio.com",
     "project_id": "stocktakeblu",
     "storage_bucket": "stocktakeblu.appspot.com"
   },

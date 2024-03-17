@@ -62,7 +62,7 @@ public class Login extends AppCompatActivity {
 //                                    Toast.makeText(Login.this, "Successful Logged in", Toast.LENGTH_SHORT).show();
                                     CuteToast.ct(Login.this, "Successful Logged in", CuteToast.LENGTH_SHORT, CuteToast.SUCCESS, true).show();
                                     //open mainActivity class
-                                    startActivity(new Intent(Login.this, AddStockActivity.class));
+                                    startActivity(new Intent(Login.this, Userlist.class));
                                     finish();
                                 } else {
 //                                    Toast.makeText(Login.this, "Incorrect Password please try again", Toast.LENGTH_SHORT).show();

@@ -43,4 +43,13 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
+    <string name="last_name">Last Name:</string>
+    <string name="title_activity_users">Users</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="device_name">Device Name :</string>
+    <string name="holders_name">Holders Name :</string>
+    <string name="serial_number">Serial Number :</string>
+    <string name="date_scanned">Date Scanned :</string>
 </resources>
